@@ -4,4 +4,4 @@
 
 <h1>yubiOS</h1>
 
-<h1>**FIDO2-first immutable OS — YubiKey is the root of trust**</h1>
+<h3>**FIDO2-first immutable OS — YubiKey is the root of trust**</h2>
