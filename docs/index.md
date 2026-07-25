@@ -119,8 +119,8 @@
 </head>
 <body data-generated-from="README.md">
   <nav class="topbar" aria-label="Document navigation">
-    <a href="README.md"><strong>yubiOS</strong> / README</a>
-    <a class="source" href="README.md">View Markdown source</a>
+    <a href="https://github.com/yubi-OS/yubiOS/blob/main/README.md"><strong>yubiOS</strong> / README</a>
+    <a class="source" href="https://github.com/yubi-OS/yubiOS/blob/main/README.md?plain=1">View Markdown source</a>
   </nav>
   <main>
 <div align="center">
