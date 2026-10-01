@@ -175,6 +175,8 @@
 <p><em>“Deliver determinism and verifiable integrity to Linux workloads everywhere.”</em></p>
 </blockquote>
 <p>yubiOS is independently building toward the same architecture, with one additional constraint: the owner-facing authority should live with the machine owner. A YubiKey provides the signing, unlock, SSH, PAM, and application-2FA boundary, while TPM/fTPM measurement and firmware state remain separate platform-integrity signals where they are useful. The "Fitting Everything Together" essay at <a href="https://0pointer.net/blog/fitting-everything-together.html">0pointer.net</a> is the primary design reference for yubiOS — hermetic /usr, DPS partitions, systemd-repart first-boot, A/B sysupdate, systemd-homed per-user encryption, and UKI + dm-verity trust chain.</p>
+
+<p style="text-align:center"><img src="https://raw.githubusercontent.com/yubi-OS/assets/main/yubiOS_slide_2.png" alt="Project state and engineering velocity" width="80%" /></p>
 <h2 id="trust-chain">Trust chain</h2>
 <pre class="text"><code>YubiKey 5
 - PIV slot 9c via CCID: Secure Boot / UKI signing with systemd-sbsign + PKCS#11
@@ -339,7 +341,7 @@ bootc upgrade</code></pre>
 </tr>
 </tbody>
 </table>
-<pre class="mermaid"><code>graph TD
+<pre class="mermaid">graph TD
     BASE[&quot;quay.io/fedora/fedora-bootc:45\n@sha256 (pinned base — ADR-015)\ndigest in PINNED.md&quot;]
     CF[&quot;Containerfile + yubiOS-bake.hcl\nrootless docker buildx bake\nyubiOS.rego strict policy&quot;]
     MKOSI[&quot;mkosi --profile yubios\nUKI + dm-verity, signed via\nYubiKey PIV slot 9c (PKCS#11)&quot;]
@@ -373,7 +375,7 @@ bootc upgrade</code></pre>
     style PIV fill:#0d6e0d,color:#fff
     style FIDO fill:#0d6e0d,color:#fff
     style HOMED fill:#0d6e0d,color:#fff
-    style CI fill:#8b4513,color:#fff</code></pre>
+    style CI fill:#8b4513,color:#fff</pre>
 <h2 id="current-research-notes">Current research notes</h2>
 <ul>
 <li><strong>Provenance-gated Chromium (OMN-165, Done)</strong>: <code>yubi-OS/chromium</code> (clean mirror) + <code>yubi-OS/chromium-provenance</code> (overlay, patch series 0001–0018, rebranded Antimony) gate AI-generated content via a C2PA/text-watermark detection stack; content-shell releases v0.1.0–v0.1.2 published (draft → attach → publish, reproducible tar). Prior-art report: <a href="https://github.com/yubi-OS/yubiOS/blob/main/refs/prior-art-ai-content-blocking-browser-2026-09-30.md">refs/prior-art-ai-content-blocking-browser-2026-09-30.md</a></li>
@@ -387,5 +389,7 @@ bootc upgrade</code></pre>
 
   </main>
   <footer>Generated from <a href="README.md">README.md</a> on 2026-10-01. The Markdown source remains authoritative.</footer>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'dark', securityLevel: 'strict' });</script>
 </body>
 </html>
