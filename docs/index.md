@@ -1,230 +1,285 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="HTML edition of the yubiOS README">
+  <base href="../">
+  <title>yubiOS — README</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1020;
+      --panel: #111827;
+      --panel-soft: #182235;
+      --text: #e5e7eb;
+      --muted: #a8b2c1;
+      --border: #334155;
+      --accent: #ff1493;
+      --accent-2: #a78bfa;
+      --link: #67e8f9;
+      --code: #09111f;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 14% 0%, rgba(255, 20, 147, .12), transparent 34rem),
+        radial-gradient(circle at 92% 8%, rgba(139, 92, 246, .15), transparent 32rem),
+        var(--bg);
+      color: var(--text);
+      font: 16px/1.65 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: .75rem max(1rem, calc((100vw - 1040px) / 2));
+      border-bottom: 1px solid rgba(148, 163, 184, .22);
+      background: rgba(11, 16, 32, .88);
+      backdrop-filter: blur(12px);
+    }
+    .topbar a { color: var(--text); text-decoration: none; }
+    .topbar .source { color: var(--link); }
+    main {
+      width: min(1040px, calc(100% - 2rem));
+      margin: 2rem auto 4rem;
+      padding: clamp(1.25rem, 3vw, 3.5rem);
+      border: 1px solid rgba(148, 163, 184, .18);
+      border-radius: 24px;
+      background: rgba(17, 24, 39, .9);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, .28);
+    }
+    h1, h2, h3 { line-height: 1.22; color: #fff; }
+    h1 { font-size: clamp(2.5rem, 7vw, 4.75rem); margin-bottom: .25rem; }
+    h2 {
+      margin-top: 2.5rem;
+      padding-bottom: .35rem;
+      border-bottom: 1px solid var(--border);
+      font-size: clamp(1.45rem, 3vw, 2rem);
+    }
+    h3 { margin-top: 1.8rem; }
+    a { color: var(--link); text-underline-offset: .18em; }
+    a:hover { color: #a5f3fc; }
+    img { max-width: 100%; height: auto; }
+    table {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+      border-collapse: collapse;
+      margin: 1.25rem 0;
+    }
+    th, td { padding: .7rem .85rem; border: 1px solid var(--border); text-align: left; vertical-align: top; }
+    th { background: var(--panel-soft); color: #fff; }
+    tr:nth-child(even) { background: rgba(30, 41, 59, .34); }
+    code {
+      border-radius: .35rem;
+      background: var(--code);
+      color: #fbcfe8;
+      padding: .12rem .3rem;
+      font: .92em ui-monospace, SFMono-Regular, Consolas, monospace;
+    }
+    pre {
+      overflow-x: auto;
+      padding: 1rem 1.1rem;
+      border: 1px solid var(--border);
+      border-radius: .75rem;
+      background: var(--code);
+      box-shadow: inset 3px 0 0 var(--accent-2);
+    }
+    pre code { padding: 0; background: none; color: #dbeafe; }
+    pre.mermaid { box-shadow: inset 3px 0 0 var(--accent); }
+    blockquote {
+      margin: 1.25rem 0;
+      padding: .25rem 1rem;
+      border-left: 4px solid var(--accent);
+      background: rgba(255, 20, 147, .06);
+      color: #fce7f3;
+    }
+    hr { border: 0; border-top: 1px solid var(--border); margin: 2.25rem 0; }
+    footer { color: var(--muted); text-align: center; padding: 0 1rem 3rem; }
+    @media (max-width: 620px) {
+      .topbar { position: static; }
+      main { width: min(100% - 1rem, 1040px); margin-top: .5rem; padding: 1rem; border-radius: 14px; }
+      th, td { min-width: 10rem; }
+    }
+    @media print {
+      body { background: #fff; color: #111827; }
+      .topbar { display: none; }
+      main { width: 100%; margin: 0; border: 0; box-shadow: none; background: #fff; }
+      h1, h2, h3 { color: #111827; }
+      a { color: #075985; }
+      pre, code { color: #111827; background: #f1f5f9; }
+    }
+  </style>
+</head>
+<body data-generated-from="README.md">
+  <nav class="topbar" aria-label="Document navigation">
+    <a href="https://github.com/yubi-OS/yubiOS/blob/main/README.md"><strong>yubiOS</strong> / README</a>
+    <a class="source" href="https://github.com/yubi-OS/yubiOS/blob/main/README.md?plain=1">View Markdown source</a>
+  </nav>
+  <main>
 <div align="center">
 
 <img src="https://raw.githubusercontent.com/yubi-OS/assets/main/logo.png" alt="yubiOS logo" width="220" style="border-radius:16px;"/>
 
-# yubiOS
-
-**FIDO2-first immutable OS — HSM/U2F as the root of trust**
-
-[![License: LGPL-2.1](https://img.shields.io/badge/license-LGPL--2.1-magenta?style=flat-square)](LICENSE)
-[![Status: Groundwork](https://img.shields.io/badge/status-groundwork-blueviolet?style=flat-square)](docs/TODO.md)
-[![YubiKey 5](https://img.shields.io/badge/YubiKey-5%20series-ff1493?style=flat-square)](https://www.yubico.com)
-[![FIDO2](https://img.shields.io/badge/FIDO2-hidraw-purple?style=flat-square)](https://fidoalliance.org)
-
-*No OEM. No trust anchors you don't control.*
-### 🦴 🚧 Work In Progress 🚧 Work In Progress 🚧 Work In Progress 🚧
-
+<h1 id="yubios">yubiOS</h1>
+<p><strong>FIDO2-first immutable OS — HSM/U2F as the root of trust</strong></p>
+<p><a href="LICENSE"><img src="https://img.shields.io/badge/license-LGPL--2.1-magenta?style=flat-square" alt="License: LGPL-2.1" /></a> <a href="https://github.com/yubi-OS/yubiOS/blob/main/docs/TODO.md"><img src="https://img.shields.io/badge/status-groundwork-blueviolet?style=flat-square" alt="Status: Groundwork" /></a> <a href="https://www.yubico.com"><img src="https://img.shields.io/badge/YubiKey-5%20series-ff1493?style=flat-square" alt="YubiKey 5" /></a> <a href="https://fidoalliance.org"><img src="https://img.shields.io/badge/FIDO2-hidraw-purple?style=flat-square" alt="FIDO2" /></a></p>
+<p><em>No OEM. No trust anchors you don't control.</em></p>
+<h3 id="--work-in-progress--work-in-progress--work-in-progress-">🦴 🚧 Work In Progress 🚧 Work In Progress 🚧 Work In Progress 🚧</h3>
 </div>
 
----
-
-## What it is
-
-yubiOS is an immutable, bootc-delivered Linux OS that treats the owner's YubiKey as the user-facing identity, unlock, and authorization boundary. It combines:
-
-| Layer | Inspiration | What it gives us |
-|---|---|---|
-| particleos ethos | [systemd/particleos](https://github.com/systemd/particleos) | Immutable `/usr`, UKIs, dm-verity, composefs, systemd-boot |
-| bootc design | [bootc-dev/bootc](https://github.com/bootc-dev/bootc) | OCI image as OS delivery unit, day-2 upgrades via registry pull |
-| systemd image model | [Fitting Everything Together](https://0pointer.net/blog/fitting-everything-together.html) | DPS partitions, systemd-repart first boot, A/B sysupdate, systemd-homed |
-| YubiKey owner-control plane | FIDO2 / PIV / OATH | Owner-held authorization for signing, unlock, SSH, PAM, and app 2FA |
-
-ARM64 is the primary target platform because it is where yubiOS can work toward owning the firmware stack below the UKI through TF-A, OP-TEE, fTPM, and U-Boot. x86-64 remains fully supported above the UKI, but its firmware and optional TPM are platform/OEM trust anchors.
-
-### Ecosystem alignment
-
-In January 2026 the core systemd team and the engineers behind, composefs, runc, Flatcar,
-ParticleOS, and Ubuntu Core — founded [Amutable](https://amutable.com) with the mission:
-
-> *“Deliver determinism and verifiable integrity to Linux workloads everywhere.”*
-
-yubiOS is independently building toward the same architecture, with one additional constraint:
-the owner-facing authority should live with the machine owner. A YubiKey provides the signing,
-unlock, SSH, PAM, and application-2FA boundary, while TPM/fTPM measurement and firmware
-state remain separate platform-integrity signals where they are useful. The "Fitting Everything
-Together" essay at [0pointer.net](https://0pointer.net/blog/fitting-everything-together.html) is the
-primary design reference for yubiOS — hermetic /usr, DPS partitions, systemd-repart first-boot,
-A/B sysupdate, systemd-homed per-user encryption, and UKI + dm-verity trust chain.
-
-## Trust chain
-
-```text
-YubiKey 5
+<hr />
+<h2 id="what-it-is">What it is</h2>
+<p>yubiOS is an immutable, bootc-delivered Linux OS that treats the owner's YubiKey as the user-facing identity, unlock, and authorization boundary. It combines:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Layer</th>
+<th>Inspiration</th>
+<th>What it gives us</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>particleos ethos</td>
+<td><a href="https://github.com/systemd/particleos">systemd/particleos</a></td>
+<td>Immutable <code>/usr</code>, UKIs, dm-verity, composefs, systemd-boot</td>
+</tr>
+<tr class="even">
+<td>bootc design</td>
+<td><a href="https://github.com/bootc-dev/bootc">bootc-dev/bootc</a></td>
+<td>OCI image as OS delivery unit, day-2 upgrades via registry pull</td>
+</tr>
+<tr class="odd">
+<td>systemd image model</td>
+<td><a href="https://0pointer.net/blog/fitting-everything-together.html">Fitting Everything Together</a></td>
+<td>DPS partitions, systemd-repart first boot, A/B sysupdate, systemd-homed</td>
+</tr>
+<tr class="even">
+<td>YubiKey owner-control plane</td>
+<td>FIDO2 / PIV / OATH</td>
+<td>Owner-held authorization for signing, unlock, SSH, PAM, and app 2FA</td>
+</tr>
+</tbody>
+</table>
+<p>ARM64 is the primary target platform because it is where yubiOS can work toward owning the firmware stack below the UKI through TF-A, OP-TEE, fTPM, and U-Boot. x86-64 remains fully supported above the UKI, but its firmware and optional TPM are platform/OEM trust anchors.</p>
+<h3 id="ecosystem-alignment">Ecosystem alignment</h3>
+<p>In January 2026 the core systemd team and the engineers behind, composefs, runc, Flatcar, ParticleOS, and Ubuntu Core — founded <a href="https://amutable.com">Amutable</a> with the mission:</p>
+<blockquote>
+<p><em>“Deliver determinism and verifiable integrity to Linux workloads everywhere.”</em></p>
+</blockquote>
+<p>yubiOS is independently building toward the same architecture, with one additional constraint: the owner-facing authority should live with the machine owner. A YubiKey provides the signing, unlock, SSH, PAM, and application-2FA boundary, while TPM/fTPM measurement and firmware state remain separate platform-integrity signals where they are useful. The "Fitting Everything Together" essay at <a href="https://0pointer.net/blog/fitting-everything-together.html">0pointer.net</a> is the primary design reference for yubiOS — hermetic /usr, DPS partitions, systemd-repart first-boot, A/B sysupdate, systemd-homed per-user encryption, and UKI + dm-verity trust chain.</p>
+<h2 id="trust-chain">Trust chain</h2>
+<pre class="text"><code>YubiKey 5
 - PIV slot 9c via CCID: Secure Boot / UKI signing with systemd-sbsign + PKCS#11
 - FIDO2 hmac-secret via hidraw: LUKS2 root and systemd-homed unlock
 - FIDO2 ed25519-sk via hidraw: SSH resident keys
 - FIDO2 U2F via hidraw: sudo/login with pam-u2f
-- OATH via hidraw: application 2FA
-```
+- OATH via hidraw: application 2FA</code></pre>
+<p>Secure Boot signing uses PIV/CCID, not hidraw. Full rationale: <a href="https://github.com/yubi-OS/yubiOS/blob/main/docs/ADR.md#adr-002-secure-boot-signing-via-piv-ccid-not-fido2-hidraw">ADR-002</a>.</p>
+<h2 id="get-yubios">Get yubiOS</h2>
+<p>yubiOS currently publishes a pre-launch multi-arch <a href="https://github.com/bootc-dev/bootc">bootc</a> OCI image on Docker Hub:</p>
+<pre class="sh"><code>docker pull 0mniteck/yubios:latest</code></pre>
+<p>For reproducible installs, pin the image by the digest produced by the latest green <code>yubiOS-ci.yml</code> publish for the intended release. Do not treat a run-specific digest in an old PR or research note as evergreen.</p>
+<blockquote>
+<p><strong>Warning:</strong> yubiOS is groundwork / work in progress. The install flows below can destroy data on the target disk. Test on disposable hardware or a VM, back up recovery material first, and use the current <a href="https://github.com/yubi-OS/yubiOS/blob/main/docs/TODO.md">TODO.md</a>, <a href="https://github.com/yubi-OS/yubiOS/blob/main/docs/BLOCKERS.md">BLOCKERS.md</a>, and <a href="https://github.com/yubi-OS/yubiOS/blob/main/docs/PR.md">PR.md</a> before treating any image as safe for broader use.</p>
+</blockquote>
+<p>Prepare and mount the target filesystems first, for example with <code>systemd-repart</code> or another installer that creates the yubiOS DPS layout. Mount the target root at <code>/mnt</code> and its boot filesystem at <code>/mnt/boot</code>, then install the image with <code>bootc install to-filesystem</code>:</p>
+<h2 id="build-from-source-with-bake-then-install-to-filesystem">Build from source with Bake, then install to-filesystem</h2>
+<pre class="sh"><code>set -eu
 
-Secure Boot signing uses PIV/CCID, not hidraw. Full rationale: [ADR-002](docs/ADR.md#adr-002-secure-boot-signing-via-piv-ccid-not-fido2-hidraw).
+case &quot;$(uname -m)&quot; in
+  x86_64) export ARCH=amd64 PLATFORM=linux/amd64 ;;
+  aarch64|arm64) export ARCH=arm64 PLATFORM=linux/arm64 ;;
+  *) echo &quot;unsupported build architecture: $(uname -m)&quot; &gt;&amp;2; exit 1 ;;
+esac
 
-## Get yubiOS
+docker buildx inspect hardened &gt;/dev/null 2&gt;&amp;1 || \
+  docker buildx create --name hardened --driver docker-container --use
 
-yubiOS currently publishes a pre-launch multi-arch [bootc](https://github.com/bootc-dev/bootc) OCI image on Docker Hub:
+PUSH=false docker buildx bake \
+  --builder hardened \
+  --file yubiOS-bake.hcl \
+  yubios-ci
 
-```sh
-docker pull 0mniteck/yubios:latest
-```
-
-For repeatable artifact selection, pin the image by the digest produced by the
-latest green `yubiOS-ci.yml` publish for the intended release. A pinned digest
-does not by itself prove the image was reproducibly built; the CI two-build
-evidence described below does. Do not treat a run-specific digest in an old PR
-or research note as evergreen.
-
-> **Warning:** yubiOS is groundwork / work in progress. The install flows below can destroy data on the target disk. Test on disposable hardware or a VM, back up recovery material first, and use the current [TODO.md](docs/TODO.md), [BLOCKERS.md](docs/BLOCKERS.md), and [PR.md](docs/PR.md) before treating any image as safe for broader use.
-
-Prepare and mount the target filesystems first, for example with `systemd-repart` or another installer that creates the yubiOS DPS layout. Mount the target root at `/mnt` and its boot filesystem at `/mnt/boot`, then install the image with `bootc install to-filesystem`:
-
-## Build from source with Bake, then install to-filesystem
-
-The supported local build host is Ubuntu 26.04. Install the distro Docker
-engine, enable it, and grant your user access to its socket:
-
-```sh
-sudo apt-get update
-sudo apt-get install -y docker.io git
-sudo systemctl enable --now docker
-sudo usermod -aG docker "$USER"
-```
-
-Membership in the `docker` group is root-equivalent. Sign out and back in once
-after changing group membership. From the repository root, run the local
-CI-parity entrypoint. With no mode it follows the complete non-`ci_fork` image
-set in `ci.yml`: all firmware boards, production, TEST-only dev, and the native
-mkosi installer:
-
-```sh
-./scripts/build-local-images.sh
-```
-
-The complete build compiles the pinned EDK2/StandaloneMM, OP-TEE/fTPM, TF-A,
-and U-Boot firmware sources; runs the QEMU fTPM checks; builds and verifies the
-SoftHSM PKCS#11-signed mkosi UKI and disk payload; and runs the production/dev
-Bake smoke tests. It is resource intensive. Use `images` for the original,
-shorter production + dev pair or select one path:
-
-```sh
-./scripts/build-local-images.sh images
-./scripts/build-local-images.sh production
-./scripts/build-local-images.sh dev
-./scripts/build-local-images.sh installer
-./scripts/build-local-images.sh firmware
-./scripts/build-local-images.sh firmware-qemu-arm64
-./scripts/build-local-images.sh firmware-rockpro64-rk3399
-ROCKCHIP_TPL=/path/to/real/rk3588-ddr-tpl.bin \
-  ./scripts/build-local-images.sh firmware-rock5b-rk3588
-LOCAL_TAG=review ./scripts/build-local-images.sh production
-./scripts/build-local-images.sh repro-production
-./scripts/build-local-images.sh repro-dev
-```
-
-Every mode launches the [PINNED.md](PINNED.md) DHI image as a privileged outer
-container, installs the SHA-512-verified Docker 29.6.0 rootless extras and
-Buildx 0.35.0 used by CI, starts a rootless Docker-in-Docker daemon, and selects
-the policy-bound `hardened` builder. Source refs used by the artifact paths are
-also pinned in `PINNED.md`. The entrypoint never logs in or pushes; it transfers
-only the selected local tags into the host Docker daemon.
-
-The `repro-production` and `repro-dev` modes are proof runs rather than image
-loads. Each performs two no-cache builds with separate digest-pinned BuildKit
-daemons, exports canonical OCI layouts, and requires their manifest, config,
-and layer bytes to match. It also asserts that OCI config/history timestamps
-equal the source commit epoch. Successful JSON reports are written to
-`repro-evidence/`; the ARM64 CI lanes run the same gate and retain their reports.
-The firmware workflow separately rebuilds StandaloneMM and all three board
-paths on a second clean ARM64 lane, compares their unsigned components, and
-retains board-scoped JSON evidence. The installer workflow likewise rebuilds
-the ARM64 mkosi image from a clean job, removes the regenerable `ldconfig`
-auxiliary cache, and compares a canonical unsigned root-filesystem record plus
-the initrd and package manifest. The random SoftHSM certificate, root-resident
-signed systemd-boot binary, signed UKI, ESP, Btrfs block serialization, and
-full-disk wrapper are recorded as separate envelopes. See [the
-reproducibility contract](refs/reproducible-builds-2026-07-22.md) for the
-installer/TF-A signing, package-snapshot, and RK3588 TPL boundaries.
-
-| Mode | Default host-loaded tags |
-|---|---|
-| `production` | `yubios:local` |
-| `dev` | `yubios:local-dev` |
-| `installer` | `yubios:local-installer` |
-| `firmware` | `yubios:local-firmware-qemu-arm64`, `yubios:local-firmware-rockpro64-rk3399`, `yubios:local-firmware-rock5b-rk3588` |
-
-`LOCAL_TAG=review` replaces the `local` portion of each name. Firmware builds
-always produce ARM64 payload images, using cross-compilation on an amd64 host.
-The RK3588 path needs a real external DDR/TPL blob for a bootable
-`u-boot-rockchip.bin`. Without `ROCKCHIP_TPL`, it mirrors the CI gate by
-packaging the built source-derived pieces and `RK-TPL-REQUIRED.txt`; do not
-flash that incomplete ROCK 5B tag. The TPL is copied into the disposable build
-container and removed with its temporary output directory.
-
-With the target filesystems already mounted at `/mnt` and `/mnt/boot`, install
-the locally built production image:
-
-```sh
 docker run --rm --privileged --pid=host --ipc=host \
   --security-opt label=type:unconfined_t \
   -v /dev:/dev \
   -v /var/lib/containers:/var/lib/containers \
   -v /:/run/host \
-  yubios:local bootc install to-filesystem \
+  &quot;yubios:ci-${ARCH}&quot; bootc install to-filesystem \
     --bootloader=systemd \
-    --root-mount-spec="" \
+    --root-mount-spec=&quot;&quot; \
     --composefs-backend \
     --skip-finalize \
-    /run/host/mnt/
-```
-
-## Fetch/install from the OCI image, 1 step
-
-```sh
-IMAGE=docker.io/0mniteck/yubios:latest
-docker pull "$IMAGE" && \
+    /run/host/mnt/</code></pre>
+<h2 id="fetchinstall-from-the-oci-image-1-step">Fetch/install from the OCI image, 1 step</h2>
+<pre class="sh"><code>IMAGE=docker.io/0mniteck/yubios:latest
+docker pull &quot;$IMAGE&quot; &amp;&amp; \
 docker run --rm --privileged --pid=host --ipc=host \
   --security-opt label=type:unconfined_t \
   -v /var/lib/containers:/var/lib/containers \
   -v /dev:/dev \
   -v /:/run/host \
-  "$IMAGE" \
+  &quot;$IMAGE&quot; \
   bootc install to-filesystem \
-    --source-imgref="registry:${IMAGE}" \
+    --source-imgref=&quot;registry:${IMAGE}&quot; \
     --bootloader=systemd \
-    --root-mount-spec="" \
+    --root-mount-spec=&quot;&quot; \
     --composefs-backend \
     --skip-finalize \
     /run/host/mnt/
 
 bootc switch 0mniteck/yubios:latest
-bootc upgrade
-```
-
-Every approved base image and GitHub Action SHA lives in [PINNED.md](PINNED.md). That file is the single source of truth for pins.
-
-| Registry | `docker.io/0mniteck/yubios` |
-|---|---|
-| Production tags | `latest` plus immutable commit tags |
-| Test tags | `dev`, `dev-<sha>` for swu2f TEST-only images |
-| Local build tags | `yubios:local`, `yubios:local-dev`, `yubios:local-installer`, and board-scoped `yubios:local-firmware-*` |
-| Artifact tags | `installer`, `firmware` and per-commit variants |
-| Platforms | `linux/amd64`, `linux/arm64` |
-| Supply chain | SLSA build provenance + SBOM attestations |
-
-## Enrollment wizard
-
-On first boot `yubiOS-enroll.service` runs on tty1 and walks through:
-
-1. Secure Boot signing through PIV slot 9c.
-2. Disk encryption through FIDO2 hmac-secret.
-3. SSH resident key generation through `ed25519-sk`.
-4. sudo/login registration through pam-u2f.
-
-Each step is skippable and independently re-runnable. See [ONBOARDING.md](docs/ONBOARDING.md).
-
-## Repo layout
-
-```text
-yubiOS/
+bootc upgrade</code></pre>
+<p>Every approved base image and GitHub Action SHA lives in <a href="https://github.com/yubi-OS/yubiOS/blob/main/PINNED.md">PINNED.md</a>. That file is the single source of truth for pins.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Registry</th>
+<th><code>docker.io/0mniteck/yubios</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Production tags</td>
+<td><code>latest</code> plus immutable commit tags</td>
+</tr>
+<tr class="even">
+<td>Test tags</td>
+<td><code>dev</code>, <code>dev-&lt;sha&gt;</code> for swu2f TEST-only images</td>
+</tr>
+<tr class="odd">
+<td>Artifact tags</td>
+<td><code>installer</code>, <code>firmware</code> and per-commit variants</td>
+</tr>
+<tr class="even">
+<td>Platforms</td>
+<td><code>linux/amd64</code>, <code>linux/arm64</code></td>
+</tr>
+<tr class="odd">
+<td>Supply chain</td>
+<td>SLSA build provenance + SBOM attestations</td>
+</tr>
+</tbody>
+</table>
+<h2 id="enrollment-wizard">Enrollment wizard</h2>
+<p>On first boot <code>yubiOS-enroll.service</code> runs on tty1 and walks through:</p>
+<ol type="1">
+<li>Secure Boot signing through PIV slot 9c.</li>
+<li>Disk encryption through FIDO2 hmac-secret.</li>
+<li>SSH resident key generation through <code>ed25519-sk</code>.</li>
+<li>sudo/login registration through pam-u2f.</li>
+</ol>
+<p>Each step is skippable and independently re-runnable. See <a href="https://github.com/yubi-OS/yubiOS/blob/main/docs/ONBOARDING.md">ONBOARDING.md</a>.</p>
+<h2 id="repo-layout">Repo layout</h2>
+<pre class="text"><code>yubiOS/
 ├── .github/
 │   ├── workflows/                  # CI, refresh, publish, firmware, VM/e2e, Lean, and integration lanes
 │   ├── patches/                    # pinned CI-only compatibility patches
@@ -252,64 +307,85 @@ yubiOS/
 ├── AGENTS.md                       # repository guidance for coding agents
 ├── README.md                       # project overview, install, and source map
 ├── PINNED.md                       # approved refs and digests
-└── LICENSE                         # LGPL-2.1 project license
-```
+└── LICENSE                         # LGPL-2.1 project license</code></pre>
+<h2 id="requirements">Requirements</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Minimum</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>YubiKey firmware</td>
+<td>5.2.3 for ed25519-sk</td>
+</tr>
+<tr class="even">
+<td>systemd</td>
+<td>261 for current measured-boot gates and v261 research targets</td>
+</tr>
+<tr class="odd">
+<td>OpenSSH</td>
+<td>8.2 for FIDO2 key types</td>
+</tr>
+<tr class="even">
+<td>pam-u2f</td>
+<td>1.3.1 for CVE-2025-23013 fix</td>
+</tr>
+<tr class="odd">
+<td>Platform</td>
+<td>arm64/aarch64 primary; x86-64 secondary but fully supported</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid"><code>graph TD
+    BASE[&quot;quay.io/fedora/fedora-bootc:45\n@sha256 (pinned base — ADR-015)\ndigest in PINNED.md&quot;]
+    CF[&quot;Containerfile + yubiOS-bake.hcl\nrootless docker buildx bake\nyubiOS.rego strict policy&quot;]
+    MKOSI[&quot;mkosi --profile yubios\nUKI + dm-verity, signed via\nYubiKey PIV slot 9c (PKCS#11)&quot;]
+    OCI[&quot;multi-arch OCI image\nlinux/amd64 + linux/arm64&quot;]
+    CI[&quot;yubiOS-ci.yml . merge-manifest\nSLSA provenance + SBOM attested&quot;]
+    REG[&quot;docker.io/0mniteck/yubios:latest\n+ immutable :&amp;lt;commit-sha&amp;gt; per build&quot;]
+    INSTALL[&quot;bootc install to-filesystem\n(externally prepared /mnt)&quot;]
+    UPGRADE[&quot;bootc switch + upgrade\nday-2 atomic update&quot;]
+    BCVK[&quot;bcvk\nephemeral VM / native-to-disk\n(test loop, USB YubiKey passthrough)&quot;]
+    ENROLL[&quot;first boot\nyubiOS-enroll.service\nYubiKey tap&quot;]
+    PIV[&quot;PIV slot 9c (CCID)\nSecure Boot signing\n(systemd-sbsign / PKCS#11)&quot;]
+    FIDO[&quot;FIDO2 (hidraw)\nLUKS2 disk unlock\nSSH ed25519-sk, pam-u2f&quot;]
+    HOMED[&quot;systemd-homed\nLUKS2 /home\nSLOT 0 FIDO2 unlock\nSLOT 1 recovery key&quot;]
 
-## Requirements
-
-| Component | Minimum |
-|---|---|
-| YubiKey firmware | 5.2.3 for ed25519-sk |
-| systemd | 261 for current measured-boot gates and v261 research targets |
-| OpenSSH | 8.2 for FIDO2 key types |
-| pam-u2f | 1.3.1 for CVE-2025-23013 fix |
-| Platform | arm64/aarch64 primary; x86-64 secondary but fully supported |
-
-```mermaid
-graph TD
-    BASE["quay.io/fedora/fedora-bootc:45\n@sha256 (pinned base — ADR-015)\ndigest in PINNED.md"]
-    CF["Containerfile + yubiOS-bake.hcl\nrootless docker buildx bake\nyubiOS.rego strict policy"]
-    MKOSI["mkosi --profile yubios\nUKI + dm-verity, signed via\nYubiKey PIV slot 9c (PKCS#11)"]
-    OCI["multi-arch OCI image\nlinux/amd64 + linux/arm64"]
-    CI["yubiOS-ci.yml . merge-manifest\nSLSA provenance + SBOM attested"]
-    REG["docker.io/0mniteck/yubios:latest\n+ immutable :&lt;commit-sha&gt; per build"]
-    INSTALL["bootc install to-filesystem\n(externally prepared /mnt)"]
-    UPGRADE["bootc switch + upgrade\nday-2 atomic update"]
-    BCVK["bcvk\nephemeral VM / native-to-disk\n(test loop, USB YubiKey passthrough)"]
-    ENROLL["first boot\nyubiOS-enroll.service\nYubiKey tap"]
-    PIV["PIV slot 9c (CCID)\nSecure Boot signing\n(systemd-sbsign / PKCS#11)"]
-    FIDO["FIDO2 (hidraw)\nLUKS2 disk unlock\nSSH ed25519-sk, pam-u2f"]
-    HOMED["systemd-homed\nLUKS2 /home\nSLOT 0 FIDO2 unlock\nSLOT 1 recovery key"]
-
-    BASE --> CF
-    BASE --> MKOSI
-    CF --> OCI
-    MKOSI --> OCI
-    OCI --> CI
-    CI -->|docker push| REG
-    REG -->|pull| INSTALL
-    REG -->|pull| UPGRADE
-    REG -->|pull| BCVK
-    INSTALL --> ENROLL
-    ENROLL --> PIV
-    ENROLL --> FIDO
-    ENROLL --> HOMED
+    BASE --&gt; CF
+    BASE --&gt; MKOSI
+    CF --&gt; OCI
+    MKOSI --&gt; OCI
+    OCI --&gt; CI
+    CI --&gt;|docker push| REG
+    REG --&gt;|pull| INSTALL
+    REG --&gt;|pull| UPGRADE
+    REG --&gt;|pull| BCVK
+    INSTALL --&gt; ENROLL
+    ENROLL --&gt; PIV
+    ENROLL --&gt; FIDO
+    ENROLL --&gt; HOMED
 
     style REG fill:#ff1493,color:#fff
     style ENROLL fill:#ff1493,color:#fff
     style PIV fill:#0d6e0d,color:#fff
     style FIDO fill:#0d6e0d,color:#fff
     style HOMED fill:#0d6e0d,color:#fff
-    style CI fill:#8b4513,color:#fff
-```
+    style CI fill:#8b4513,color:#fff</code></pre>
+<h2 id="current-research-notes">Current research notes</h2>
+<ul>
+<li><strong>Provenance-gated Chromium (OMN-165, Done)</strong>: <code>yubi-OS/chromium</code> (clean mirror) + <code>yubi-OS/chromium-provenance</code> (overlay, patch series 0001–0018, rebranded Antimony) gate AI-generated content via a C2PA/text-watermark detection stack; content-shell releases v0.1.0–v0.1.2 published (draft → attach → publish, reproducible tar). Prior-art report: <a href="https://github.com/yubi-OS/yubiOS/blob/main/refs/prior-art-ai-content-blocking-browser-2026-09-30.md">refs/prior-art-ai-content-blocking-browser-2026-09-30.md</a></li>
+<li><strong>Jev orchestrator + Jev Automations</strong>: gated, verifiable, human-approvable automation (fail-closed policy gate, expiring approval bindings, six terminal states, append-only audit) with the n8n lead machine retargeted onto it; skills live at <a href="https://github.com/yubi-OS/yubiOS/blob/main/skills/jev-orchestrator/SKILL.md">skills/jev-orchestrator</a>. Refs: <a href="https://github.com/yubi-OS/yubiOS/blob/main/refs/jev-orchestrator-2026-10-01.md">refs/jev-orchestrator-2026-10-01.md</a>, <a href="https://github.com/yubi-OS/yubiOS/blob/main/refs/jev-automations-2026-10-01.md">refs/jev-automations-2026-10-01.md</a></li>
+<li><strong>refs/ refresh sweep (PRs #260–#274)</strong>: 234 refs docs triaged with the jev-1.13 decision model + searXNG digs; typed research DB landed at <a href="https://github.com/yubi-OS/yubiOS/blob/main/papers/data/refs-refresh-2026-09-29/archive.json">papers/data/refs-refresh-2026-09-29</a></li>
+<li><strong>Knowledge corpora (yubi-OS/knowledge)</strong>: five corpora minted via <a href="https://github.com/yubi-OS/yubiOS/blob/main/skills/knowledge-corpus-mint/SKILL.md">skills/knowledge-corpus-mint</a> (yubios, yubios v2, 0pointer, systemd-usage, strudel)</li>
+<li><strong>Papers corpus</strong>: <a href="https://github.com/yubi-OS/yubiOS/blob/main/papers/learned-latent-curves-2026-08-06.pdf">papers/learned-latent-curves-2026-08-06.pdf</a>, <a href="https://github.com/yubi-OS/yubiOS/blob/main/papers/is-this-x-2026-08-12-Final.pdf">papers/is-this-x-2026-08-12-Final.pdf</a>, <a href="https://github.com/yubi-OS/yubiOS/blob/main/papers/curved-corpus-unified-2026-08-13.pdf">papers/curved-corpus-unified-2026-08-13.pdf</a>; the 7-theorem Lean machine-check lives in <a href="https://github.com/yubi-OS/yubiOS/blob/main/papers/data/lean/CurvedCorpus.lean">papers/data/lean/CurvedCorpus.lean</a> and is verified by <code>lean-check.yml</code> CI</li>
+<li><strong>Release train</strong>: v0.7.1 → v0.8.9 (2026-09-26); SLSA build provenance + SPDX SBOM + cosign attestations shipped across the publish workflows (OMN-157)</li>
+</ul>
+<p>All decisions are recorded in <a href="https://github.com/yubi-OS/yubiOS/blob/main/docs/ADR.md">ADR.md</a>, with source-backed research in <a href="https://github.com/yubi-OS/yubiOS/tree/main/refs">refs/</a>.</p>
 
-## Current research notes
-
-- **Provenance-gated Chromium (OMN-165, Done)**: `yubi-OS/chromium` (clean mirror) + `yubi-OS/chromium-provenance` (overlay, patch series 0001–0018, rebranded Antimony) gate AI-generated content via a C2PA/text-watermark detection stack; content-shell releases v0.1.0–v0.1.2 published (draft → attach → publish, reproducible tar). Prior-art report: [refs/prior-art-ai-content-blocking-browser-2026-09-30.md](refs/prior-art-ai-content-blocking-browser-2026-09-30.md)
-- **Jev orchestrator + Jev Automations**: gated, verifiable, human-approvable automation (fail-closed policy gate, expiring approval bindings, six terminal states, append-only audit) with the n8n lead machine retargeted onto it; skills live at [skills/jev-orchestrator](skills/jev-orchestrator/SKILL.md). Refs: [refs/jev-orchestrator-2026-10-01.md](refs/jev-orchestrator-2026-10-01.md), [refs/jev-automations-2026-10-01.md](refs/jev-automations-2026-10-01.md)
-- **refs/ refresh sweep (PRs #260–#274)**: 234 refs docs triaged with the jev-1.13 decision model + searXNG digs; typed research DB landed at [papers/data/refs-refresh-2026-09-29](papers/data/refs-refresh-2026-09-29/archive.json)
-- **Knowledge corpora (yubi-OS/knowledge)**: five corpora minted via [skills/knowledge-corpus-mint](skills/knowledge-corpus-mint/SKILL.md) (yubios, yubios v2, 0pointer, systemd-usage, strudel)
-- **Papers corpus**: [papers/learned-latent-curves-2026-08-06.pdf](papers/learned-latent-curves-2026-08-06.pdf), [papers/is-this-x-2026-08-12-Final.pdf](papers/is-this-x-2026-08-12-Final.pdf), [papers/curved-corpus-unified-2026-08-13.pdf](papers/curved-corpus-unified-2026-08-13.pdf); the 7-theorem Lean machine-check lives in [papers/data/lean/CurvedCorpus.lean](papers/data/lean/CurvedCorpus.lean) and is verified by `lean-check.yml` CI
-- **Release train**: v0.7.1 → v0.8.9 (2026-09-26); SLSA build provenance + SPDX SBOM + cosign attestations shipped across the publish workflows (OMN-157)
-
-All decisions are recorded in [ADR.md](docs/ADR.md), with source-backed research in [refs/](refs/).
+  </main>
+  <footer>Generated from <a href="README.md">README.md</a> on 2026-10-01. The Markdown source remains authoritative.</footer>
+</body>
+</html>
