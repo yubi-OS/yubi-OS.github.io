@@ -1,13 +1,13 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/yubi-OS/assets/refs/heads/main/logo.png" alt="yubiOS logo" width="220" style="border-radius:16px;"/>
+<img src="https://raw.githubusercontent.com/yubi-OS/assets/main/logo.png" alt="yubiOS logo" width="220" style="border-radius:16px;"/>
 
 # yubiOS
 
 **FIDO2-first immutable OS — HSM/U2F as the root of trust**
 
 [![License: LGPL-2.1](https://img.shields.io/badge/license-LGPL--2.1-magenta?style=flat-square)](LICENSE)
-[![Status: Groundwork](https://img.shields.io/badge/status-groundwork-blueviolet?style=flat-square)](TODO.md)
+[![Status: Groundwork](https://img.shields.io/badge/status-groundwork-blueviolet?style=flat-square)](https://github.com/yubi-OS/yubiOS/blob/main/docs/TODO.md)
 [![YubiKey 5](https://img.shields.io/badge/YubiKey-5%20series-ff1493?style=flat-square)](https://www.yubico.com)
 [![FIDO2](https://img.shields.io/badge/FIDO2-hidraw-purple?style=flat-square)](https://fidoalliance.org)
 
@@ -57,7 +57,7 @@ YubiKey 5
 - OATH via hidraw: application 2FA
 ```
 
-Secure Boot signing uses PIV/CCID, not hidraw. Full rationale: [ADR-002](ADR.md#adr-002-secure-boot-signing-via-piv-ccid-not-fido2-hidraw).
+Secure Boot signing uses PIV/CCID, not hidraw. Full rationale: [ADR-002](https://github.com/yubi-OS/yubiOS/blob/main/docs/ADR.md#adr-002-secure-boot-signing-via-piv-ccid-not-fido2-hidraw).
 
 ## Get yubiOS
 
@@ -73,7 +73,7 @@ does not by itself prove the image was reproducibly built; the CI two-build
 evidence described below does. Do not treat a run-specific digest in an old PR
 or research note as evergreen.
 
-> **Warning:** yubiOS is groundwork / work in progress. The install flows below can destroy data on the target disk. Test on disposable hardware or a VM, back up recovery material first, and use the current [TODO.md](TODO.md), [BLOCKERS.md](BLOCKERS.md), and [PR.md](PR.md) before treating any image as safe for broader use.
+> **Warning:** yubiOS is groundwork / work in progress. The install flows below can destroy data on the target disk. Test on disposable hardware or a VM, back up recovery material first, and use the current [TODO.md](https://github.com/yubi-OS/yubiOS/blob/main/docs/TODO.md), [BLOCKERS.md](https://github.com/yubi-OS/yubiOS/blob/main/docs/BLOCKERS.md), and [PR.md](https://github.com/yubi-OS/yubiOS/blob/main/docs/PR.md) before treating any image as safe for broader use.
 
 Prepare and mount the target filesystems first, for example with `systemd-repart` or another installer that creates the yubiOS DPS layout. Mount the target root at `/mnt` and its boot filesystem at `/mnt/boot`, then install the image with `bootc install to-filesystem`:
 
@@ -120,7 +120,7 @@ LOCAL_TAG=review ./scripts/build-local-images.sh production
 ./scripts/build-local-images.sh repro-dev
 ```
 
-Every mode launches the [PINNED.md](PINNED.md) DHI image as a privileged outer
+Every mode launches the [PINNED.md](https://github.com/yubi-OS/yubiOS/blob/main/PINNED.md) DHI image as a privileged outer
 container, installs the SHA-512-verified Docker 29.6.0 rootless extras and
 Buildx 0.35.0 used by CI, starts a rootless Docker-in-Docker daemon, and selects
 the policy-bound `hardened` builder. Source refs used by the artifact paths are
@@ -141,7 +141,7 @@ auxiliary cache, and compares a canonical unsigned root-filesystem record plus
 the initrd and package manifest. The random SoftHSM certificate, root-resident
 signed systemd-boot binary, signed UKI, ESP, Btrfs block serialization, and
 full-disk wrapper are recorded as separate envelopes. See [the
-reproducibility contract](refs/reproducible-builds-2026-07-22.md) for the
+reproducibility contract](https://github.com/yubi-OS/yubiOS/blob/main/refs/reproducible-builds-2026-07-22.md) for the
 installer/TF-A signing, package-snapshot, and RK3588 TPL boundaries.
 
 | Mode | Default host-loaded tags |
@@ -199,7 +199,7 @@ bootc switch 0mniteck/yubios:latest
 bootc upgrade
 ```
 
-Every approved base image and GitHub Action SHA lives in [PINNED.md](PINNED.md). That file is the single source of truth for pins.
+Every approved base image and GitHub Action SHA lives in [PINNED.md](https://github.com/yubi-OS/yubiOS/blob/main/PINNED.md). That file is the single source of truth for pins.
 
 | Registry | `docker.io/0mniteck/yubios` |
 |---|---|
@@ -219,50 +219,39 @@ On first boot `yubiOS-enroll.service` runs on tty1 and walks through:
 3. SSH resident key generation through `ed25519-sk`.
 4. sudo/login registration through pam-u2f.
 
-Each step is skippable and independently re-runnable. See [ONBOARDING.md](ONBOARDING.md).
+Each step is skippable and independently re-runnable. See [ONBOARDING.md](https://github.com/yubi-OS/yubiOS/blob/main/docs/ONBOARDING.md).
 
 ## Repo layout
 
 ```text
 yubiOS/
 ├── .github/
-│   ├── workflows/                  # CI, refresh, publish, firmware, VM/e2e, integration lanes
+│   ├── workflows/                  # CI, refresh, publish, firmware, VM/e2e, Lean, and integration lanes
 │   ├── patches/                    # pinned CI-only compatibility patches
 │   └── ISSUE_TEMPLATE/             # bug and feature intake templates
-├── assets/                         # logo, campaign media, README HTML, and contributor map
-├── mkosi.conf                      # primary mkosi build definition
-├── mkosi.conf.d/                   # desktop, minimal, Surface, Chipsec, and test profiles
+├── cosign/                         # cosign signing config + keypair for SLSA provenance / SBOM attestations
+├── docs/                           # ADR, SPEC, MISSION, threat model, planning surfaces, and self-doc corpora
+├── papers/                         # research papers (TeX + PDF), charts, data, Lean proofs, and render scripts
+├── playbooks/                      # operational CI/CD runbooks (dispatch, signing, VM e2e, drift recovery)
 ├── refs/                           # dated research notes, planning cycles, implementation specs
-├── scripts/                        # local CI-parity image build entrypoints
+├── scripts/                        # local CI-parity image build entrypoints + validation and drift tooling
+├── skills/                         # agent skill corpus (SKILL.md source of truth, 121 skills)
 ├── tests/                          # unit, VM, PKCS#11, FIDO2, UKI, and policy verification tests
-├── usr/lib/                        # OS overlay: bootc, dracut, PAM, repart, systemd, yubiOS scripts
+├── tools/                          # corpus tooling (auditor, point-map, spectral, skill-check, phonon, ...)
+├── usr/lib/                        # OS overlay: bootc, systemd, udev, and yubiOS scripts (chipsec, sshd, uki)
 ├── Containerfile                   # production bootc image definition
 ├── Containerfile.dev               # TEST-only swu2f/dev image definition
+├── Containerfile.uki               # UKI bake target image definition
+├── Makefile                        # developer entrypoints
+├── mkosi.conf                      # primary mkosi build definition
+├── mkosi.conf.d/                   # desktop, minimal, Surface, Chipsec, and test profiles
+├── mkosi.extra/ + mkosi.finalize   # injected overlays and finalize hook
 ├── yubiOS-bake.hcl                 # non-fork Docker build graph, tags, outputs, and policy wiring
 ├── yubiOS.rego                     # Docker Build Policy gate for pins and registries
 ├── renovate.json                   # pinned digest tracking automation
 ├── AGENTS.md                       # repository guidance for coding agents
 ├── README.md                       # project overview, install, and source map
-├── CI_MAP.md                       # workflow topology, triggers, and artifact ownership
-├── CONTRIBUTING.md                 # contributor workflow and DCO expectations
-├── CODE_OF_CONDUCT.md              # community conduct and reporting rules
-├── SECURITY.md                     # vulnerability reporting policy
-├── MAINTAINER.md                   # maintainer responsibilities and release operations
-├── PLAN.md                         # implementation plan and sequencing
-├── OPTS.md                         # option and trade-off inventory
-├── THREAT_MODEL.md                 # assets, boundaries, adversaries, and residual risks
-├── ADR.md                          # architecture decision records
-├── ARCHITECTURE.md                 # trust chain and build pipeline diagrams
-├── SPEC.md                         # normative project specification
-├── MISSION.md                      # project mission and AI-resilience framing
-├── MITIGATE.md                     # threat model and control mapping
-├── FUTURE.md                       # roadmap and research backlog
-├── ONBOARDING.md                   # operator enrollment guide
-├── CITATION.md                     # citation guidance and upstream source trail
-├── PR.md                           # public-relations campaign planning
 ├── PINNED.md                       # approved refs and digests
-├── BLOCKERS.md                     # active dependency and blocker map
-├── TODO.md                         # active planning surface
 └── LICENSE                         # LGPL-2.1 project license
 ```
 
@@ -316,13 +305,11 @@ graph TD
 
 ## Current research notes
 
-- Workflow evidence review: [refs/ci-evidence-2026-07-21.md](refs/ci-evidence-2026-07-21.md)
-- systemd-family upstream progress and contributor bubble map: [refs/systemd-upstream-progress-2026-07-21.md](refs/systemd-upstream-progress-2026-07-21.md)
-- Latest docs/research planning pass: [refs/planning-cycle-2026-07-11.md](refs/planning-cycle-2026-07-11.md)
-- Public-relations campaign: [PR.md](PR.md), with kickoff friend map at [refs/pr-friend-map-2026-07-17.md](refs/pr-friend-map-2026-07-17.md)
-- ARM64 zstd EFI zboot / bcvk DirectBoot: [refs/zstd-efi-zboot-bcvk.md](refs/zstd-efi-zboot-bcvk.md)
-- LUKS2 FIDO2 e2e coverage: [refs/luks-fido2-e2e-test.md](refs/luks-fido2-e2e-test.md)
-- ARM64 fTPM Phase F0: [refs/arm64-ftpm-phase-f0.md](refs/arm64-ftpm-phase-f0.md)
-- systemd v261 base-image history: [refs/v261-base-image.md](refs/v261-base-image.md)
+- **Provenance-gated Chromium (OMN-165, Done)**: `yubi-OS/chromium` (clean mirror) + `yubi-OS/chromium-provenance` (overlay, patch series 0001–0018, rebranded Antimony) gate AI-generated content via a C2PA/text-watermark detection stack; content-shell releases v0.1.0–v0.1.2 published (draft → attach → publish, reproducible tar). Prior-art report: [refs/prior-art-ai-content-blocking-browser-2026-09-30.md](https://github.com/yubi-OS/yubiOS/blob/main/refs/prior-art-ai-content-blocking-browser-2026-09-30.md)
+- **Jev orchestrator + Jev Automations**: gated, verifiable, human-approvable automation (fail-closed policy gate, expiring approval bindings, six terminal states, append-only audit) with the n8n lead machine retargeted onto it; skills live at [skills/jev-orchestrator](https://github.com/yubi-OS/yubiOS/blob/main/skills/jev-orchestrator/SKILL.md). Refs: [refs/jev-orchestrator-2026-10-01.md](https://github.com/yubi-OS/yubiOS/blob/main/refs/jev-orchestrator-2026-10-01.md), [refs/jev-automations-2026-10-01.md](https://github.com/yubi-OS/yubiOS/blob/main/refs/jev-automations-2026-10-01.md)
+- **refs/ refresh sweep (PRs #260–#274)**: 234 refs docs triaged with the jev-1.13 decision model + searXNG digs; typed research DB landed at [papers/data/refs-refresh-2026-09-29](https://github.com/yubi-OS/yubiOS/blob/main/papers/data/refs-refresh-2026-09-29/archive.json)
+- **Knowledge corpora (yubi-OS/knowledge)**: five corpora minted via [skills/knowledge-corpus-mint](https://github.com/yubi-OS/yubiOS/blob/main/skills/knowledge-corpus-mint/SKILL.md) (yubios, yubios v2, 0pointer, systemd-usage, strudel)
+- **Papers corpus**: [papers/learned-latent-curves-2026-08-06.pdf](https://github.com/yubi-OS/yubiOS/blob/main/papers/learned-latent-curves-2026-08-06.pdf), [papers/is-this-x-2026-08-12-Final.pdf](https://github.com/yubi-OS/yubiOS/blob/main/papers/is-this-x-2026-08-12-Final.pdf), [papers/curved-corpus-unified-2026-08-13.pdf](https://github.com/yubi-OS/yubiOS/blob/main/papers/curved-corpus-unified-2026-08-13.pdf); the 7-theorem Lean machine-check lives in [papers/data/lean/CurvedCorpus.lean](https://github.com/yubi-OS/yubiOS/blob/main/papers/data/lean/CurvedCorpus.lean) and is verified by `lean-check.yml` CI
+- **Release train**: v0.7.1 → v0.8.9 (2026-09-26); SLSA build provenance + SPDX SBOM + cosign attestations shipped across the publish workflows (OMN-157)
 
-All decisions are recorded in [ADR.md](ADR.md), with source-backed research in [refs/](refs/).
+All decisions are recorded in [ADR.md](https://github.com/yubi-OS/yubiOS/blob/main/docs/ADR.md), with source-backed research in [refs/](https://github.com/yubi-OS/yubiOS/blob/main/refs/).
