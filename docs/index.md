@@ -5,7 +5,7 @@
   <meta name="color-scheme" content="dark light">
   <meta name="description" content="HTML edition of the yubiOS README">
   <base href="../">
-  <title>yubiOS — README</title>
+  <title>yubiOS Immutable OS</title>
   <style>
     :root {
       color-scheme: dark;
