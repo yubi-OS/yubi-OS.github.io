@@ -131,7 +131,7 @@
 <p><strong>FIDO2-first immutable OS — HSM/U2F as the root of trust</strong></p>
 <p><a href="LICENSE"><img src="https://img.shields.io/badge/license-LGPL--2.1-magenta?style=flat-square" alt="License: LGPL-2.1" /></a> <a href="https://github.com/yubi-OS/yubiOS/blob/main/docs/TODO.md"><img src="https://img.shields.io/badge/status-groundwork-blueviolet?style=flat-square" alt="Status: Groundwork" /></a> <a href="https://www.yubico.com"><img src="https://img.shields.io/badge/YubiKey-5%20series-ff1493?style=flat-square" alt="YubiKey 5" /></a> <a href="https://fidoalliance.org"><img src="https://img.shields.io/badge/FIDO2-hidraw-purple?style=flat-square" alt="FIDO2" /></a></p>
 <p><em>No OEM. No trust anchors you don't control.</em></p>
-<h3 id="--work-in-progress--work-in-progress--work-in-progress-">🦴 🚧 Work In Progress 🚧 Work In Progress 🚧 Work In Progress 🚧</h3>
+<h3 id="--work-in-progress--work-in-progress--work-in-progress-">🦴 🚧 Work In Progress 🚧 Technical Preview 🚧 Work In Progress 🚧</h3>
 </div>
 
 <hr />
